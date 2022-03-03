@@ -1,7 +1,7 @@
 <template lang="">
     <div class="container">
         <div class="inner">
-            <MovieItem  v-for="movie in movies" :key="movie.imdbID"/>
+            <MovieItem  v-for="movie in movies" :key="movie.imdbID" :movie="movie"/>
         </div>
         
     </div>
@@ -12,9 +12,9 @@ export default {
     components: {
         MovieItem,
     },
-    data() {
-        return {
-            movies: []
+    computed: {
+        movies() {
+            return this.$store.state.movie.movies
         }
     },
 }
