@@ -1,7 +1,11 @@
 <template lang="">
-    <div 
+    <routerLink :to="`/movie/${movie.imdbID}`" 
     :style="{backgroundImage: `url(${movie.Poster})`}"
     class="movie">
+    <Loader
+    v-if="imageLoading"
+    :size="1.5"
+    absolute />
     <div class="info">
         <div class="year">
             {{movie.Year}}
@@ -10,21 +14,47 @@
             {{movie.Title}}
         </div>
     </div>
-    </div>
+    </routerLink>
 </template>
 <script>
+import Loader from '~/components/Loader'
 export default {
+    components: {
+        Loader,
+    },
     props: {
         movie: {
             type: Object,
             default: ()=>({})
         },
     },
+    mounted () {  // 연결된 직후
+        this.init();
+    },
+    data() {
+        return {
+            imageLoading: true
+        }
+    },
+    methods: {
+        async init() {
+            const poster = this.movie.Poster
+            if(!poster || poster ==='N/A')
+            {
+                this.imageLoading = false
+            }
+            else{
+                await this.$loadImage(poster)
+                this.imageLoading = false
+            }
+            
+        }
+    },
     
 }
 </script>
 <style lang="scss" scoped>
-@import '~/scss/main';
+//@import '~/scss/main';
 .movie{
     $width: 168px;
     width: $width;

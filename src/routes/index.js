@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './Home'
 import About from './About'
 import Movie from './Movie'
+import NotFound from './NotFound.vue'
 export default createRouter({
   history: createWebHashHistory(),
   scrollBehavior() {
@@ -13,12 +14,16 @@ export default createRouter({
       component: Home,
     },
     {
-      path: '/movie',
+      path: '/movie/:id',
       component: Movie,
     },
     {
       path: '/about',
       component: About,
+    },
+    {
+      path: '/:notFound(.*)',
+      component: NotFound,
     },
   ],
 })
