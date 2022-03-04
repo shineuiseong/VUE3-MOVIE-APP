@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link to="/" class="logo">
-         <span>OMDbAPI</span>.COM
+         <span>ShineuiSeong</span>.COM
         </router-link>
     </div>
 </template>
